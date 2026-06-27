@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+
+@theme inline {
+  --color-background: var(--background);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.btn-primary {
+  @apply bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition-colors;
+}
+.btn-success {
+  @apply bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded transition-colors;
+}
+.btn-danger {
+  @apply bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded transition-colors;
+}
+.btn-outline {
+  @apply border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-semibold py-2 px-4 rounded transition-colors;
+}
+
+/* Regra 2: Atalhos - usar teclas */
+.shortcut-hint {
+  @apply text-xs text-gray-400 bg-gray-100 px-1 rounded;
+}
+
+/* Regra 3: Feedback */
+.loading-spinner {
+  @apply animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600;
+}
+
+.toast-success {
+  @apply bg-green-500 text-white p-4 rounded shadow-lg;
+}
+.toast-error {
+  @apply bg-red-500 text-white p-4 rounded shadow-lg;
+}
+
+/* Regra 4: Fechamento de diálogo */
+.modal-enter {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Regra 5: Prevenção de erros */
+.input-error {
+  @apply border-red-500 focus:ring-red-500;
+}
+.input-success {
+  @apply border-green-500 focus:ring-green-500;
+}
+
+/* Regra 6: Facilidade de reversão */
+.undo-hint {
+  @apply text-sm text-gray-500 italic;
+}
+
+/* Regra 7: Controle do usuário */
+.cancel-btn {
+  @apply bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded transition-colors;
+}
+
+/* Regra 8: Redução de carga mental */
+.skeleton {
+  @apply bg-gray-200 animate-pulse rounded;
+}

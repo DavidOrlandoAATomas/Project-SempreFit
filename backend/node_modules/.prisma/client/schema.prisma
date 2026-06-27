@@ -1,0 +1,87 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String         @id @default(uuid())
+  name          String
+  email         String         @unique
+  password      String
+  role          Role           @default(USER)
+  height        Float
+  weight        Float
+  birthDate     DateTime
+  gender        Gender
+  goal          Goal
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  exercises     Exercise[]
+  meals         Meal[]
+  meditations   Meditation[]
+  refreshTokens RefreshToken[]
+}
+
+model Meal {
+  id        String   @id @default(uuid())
+  name      String
+  calories  Int
+  category  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Exercise {
+  id             String   @id @default(uuid())
+  activity       String
+  duration       Int
+  caloriesBurned Int
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Meditation {
+  id        String   @id @default(uuid())
+  mood      Int
+  duration  Int
+  notes     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String
+  expiresAt DateTime
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@index([expiresAt])
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+enum Goal {
+  WEIGHT_LOSS
+  MUSCLE_GAIN
+  MAINTENANCE
+}
+
+enum Role {
+  USER
+  ADMIN
+}
