@@ -441,11 +441,11 @@ Este projecto encontra-se licenciado sob a Licença MIT.
 
 # 👨‍💻 Autor
 
-**David Orlando A. Tomás**
+**David Orlando A. A. Tomás**
 
 Licenciatura em Engenharia Informática
 
-Instituto Superior Politécnico de Tecnologias e Ciências (ISPTEC)
+Universidade Agostinho Neto, Faculdade de Engenharia, Departamento de Informática
 
 GitHub:
 https://github.com/DavidOrlandoAATomas
