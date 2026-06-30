@@ -24,6 +24,14 @@ services:
     environment:
       DATABASE_URL: postgresql://postgres:postgres@db:5432/semprefit
       NODE_ENV: production
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET}
+      SPOONACULAR_API_KEY: ${SPOONACULAR_API_KEY}
+      GOOGLE_HEALTH_CLIENT_ID: ${GOOGLE_HEALTH_CLIENT_ID}
+      GOOGLE_HEALTH_CLIENT_SECRET: ${GOOGLE_HEALTH_CLIENT_SECRET}
+      FRONTEND_URL: ${FRONTEND_URL}
+      EMAIL_USER: ${EMAIL_USER}
+      EMAIL_PASS: ${EMAIL_PASS}
     depends_on:
       db:
         condition: service_healthy
@@ -36,9 +44,11 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile.prod
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
     restart: always
     environment:
-      NODE_ENV: production
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
     ports:
       - "3003:3000"
     depends_on:
@@ -50,7 +60,7 @@ services:
     image: nginx:alpine
     restart: always
     ports:
-      - "3004:80"
+      - "80:80"  
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
@@ -58,6 +68,13 @@ services:
       - backend
     networks:
       - semprefit-network
+
+volumes:
+  postgres_data:
+
+networks:
+  semprefit-network:
+    driver: bridge
 
 volumes:
   postgres_data:
