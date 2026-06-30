@@ -6,6 +6,8 @@ WORKDIR /app
 COPY package*.json ./
 COPY prisma ./prisma/
 
+RUN chmod -R +x node_modules/.bin
+
 RUN npm install
 
 RUN npx prisma generate
