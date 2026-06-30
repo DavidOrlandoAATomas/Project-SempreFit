@@ -75,10 +75,3 @@ volumes:
 networks:
   semprefit-network:
     driver: bridge
-
-volumes:
-  postgres_data:
-
-networks:
-  semprefit-network:
-    driver: bridge
